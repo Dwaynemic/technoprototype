@@ -5,20 +5,25 @@
 # =============================================================================
 
 import streamlit as st
+import os
 from database.db import init_db, fetch_user_by_id, count_unread
 
 
 # ── Page configuration (must be first Streamlit call) ─────────────────────
 st.set_page_config(
     page_title="BukidKnown – Discover Bukidnon",
-    page_icon="https://scontent.fcgy3-2.fna.fbcdn.net/v/t1.15752-9/683155885_2053233712272604_5427929101685615630_n.png?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGO-V5xkyKmTuvz-5MtCB8p4wxRxNcD7objDFHE1wPuhukmcDZfmwJyHpQLrhesH1luSv-oX7of7v-eYjmW_-i2&_nc_ohc=QEA_x5q_eSkQ7kNvwHA8Pq5&_nc_oc=Adowb0wX2XiywU3ctQhGPON5Avq8OjqjM-y5oCo8AbhkqPDcqcn414aoz3v1vziUXf4&_nc_zt=23&_nc_ht=scontent.fcgy3-2.fna&_nc_ss=7b2a8&oh=03_Q7cD5AHHgO76T9POsEBO1knPBKHcp4EhYaGYKtci27f8_y9vUA&oe=6A198263",
+    page_icon="🏔️",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
+# ── Get the directory where this script is located ─────────────────────────
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 def load_css():
+    css_path = os.path.join(BASE_DIR, "assets", "style.css")
     try:
-        with open("assets/style.css", encoding="utf-8") as f:
+        with open(css_path, encoding="utf-8") as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
     except FileNotFoundError:
         st.warning("CSS file not found (assets/style.css)")
@@ -34,13 +39,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-
 # ── Initialize database on first run ──────────────────────────────────────
 init_db()
-
-# ── Inject global stylesheet ──────────────────────────────────────────────
-with open("assets/style.css", encoding="utf-8") as _f:
-    st.markdown(f"<style>{_f.read()}</style>", unsafe_allow_html=True)
 
 
 # ── Helper: get current logged-in user ────────────────────────────────────
