@@ -7,12 +7,6 @@
 import streamlit as st
 from database.db import init_db, fetch_user_by_id, count_unread
 
-def load_css():
-    with open("assets/style.css", encoding="utf-8") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-load_css()
-
 # ── Page configuration (must be first Streamlit call) ─────────────────────
 st.set_page_config(
     page_title="BukidKnown – Discover Bukidnon",
