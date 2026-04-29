@@ -21,12 +21,15 @@ st.set_page_config(
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def load_css():
-    css_path = os.path.join(BASE_DIR, "assets", "style.css")
+    css_path = os.path.join(os.path.dirname(__file__), "assets", "style.css")
+    if not os.path.exists(css_path):
+        # Try from repo root (for Streamlit Cloud)
+        css_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "bukidknown", "assets", "style.css")
     try:
         with open(css_path, encoding="utf-8") as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
     except FileNotFoundError:
-        st.warning("CSS file not found (assets/style.css)")
+        st.warning(f"CSS file not found: {css_path}")
 
 load_css()
 
