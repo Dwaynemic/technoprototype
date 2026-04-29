@@ -21,9 +21,10 @@ st.set_page_config(
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def load_css():
+    # Try path relative to this file (local dev)
     css_path = os.path.join(os.path.dirname(__file__), "assets", "style.css")
     if not os.path.exists(css_path):
-        # Try from repo root (for Streamlit Cloud)
+        # Try path relative to repo root (Streamlit Cloud)
         css_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "bukidknown", "assets", "style.css")
     try:
         with open(css_path, encoding="utf-8") as f:
