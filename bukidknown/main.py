@@ -7,6 +7,7 @@
 import streamlit as st
 from database.db import init_db, fetch_user_by_id, count_unread
 
+
 # ── Page configuration (must be first Streamlit call) ─────────────────────
 st.set_page_config(
     page_title="BukidKnown – Discover Bukidnon",
@@ -14,6 +15,16 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+def load_css():
+    try:
+        with open("assets/style.css", encoding="utf-8") as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    except FileNotFoundError:
+        st.warning("CSS file not found (assets/style.css)")
+
+load_css()
+
 st.markdown("""
 <style>
     [data-testid="stSidebarNav"] {
