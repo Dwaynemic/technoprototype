@@ -521,7 +521,7 @@ section[data-testid="stSidebar"] hr {
 /* ── Logo block ─────────────────────────────────────────────────────────── */
 .bk-logo img {
     object-fit: contain;
-    filter: brightness(1.8) contrast(1.5);
+    filter: brightness(1.) contrast(1.5);
 }
 .bk-logo-icon { font-size: 2rem; }
 .bk-logo-text {
